@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/dlior/cm-mr/compare/app-2@v0.1.0...app-2@v1.0.0) (2025-06-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* **app-2:** log
+
+### Features
+
+* **app-2:** log ([19435b1](https://github.com/dlior/cm-mr/commit/19435b1307f238d63bcd9971fe60a0893681f76c))
+
 ## 0.1.0 (2025-06-21)
 
 
