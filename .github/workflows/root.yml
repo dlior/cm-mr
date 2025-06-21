@@ -1,0 +1,55 @@
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/CHANGELOG.md'
+      - '**/package.json'
+      - '**/pyproject.toml'
+      - '**/release-please-manifest.json'
+  pull_request:
+    branches: ['*']
+    paths-ignore:
+      - '**/CHANGELOG.md'
+      - '**/package.json'
+      - '**/pyproject.toml'
+      - '**/release-please-manifest.json'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      app-1: ${{ steps.filter.outputs.app_1 }}
+      app-2: ${{ steps.filter.outputs.app_2 }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            app_1:
+              - 'apps/app-1/**'
+            app_2:
+              - 'apps/app-2/**'
+
+  app-1:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.app-1 == 'true'
+    uses: ./.github/workflows/app-1.yml
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+  app-2:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.app-2 == 'true'
+    uses: ./.github/workflows/app-2.yml
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write

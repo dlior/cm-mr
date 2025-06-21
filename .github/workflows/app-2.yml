@@ -1,0 +1,47 @@
+name: App 1 Pipeline
+
+on:
+  workflow_call:
+
+jobs:
+  release-please:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    runs-on: ubuntu-latest
+    outputs:
+      app-2--tag_name: ${{ steps.release.outputs.app-2--tag_name}}
+      app-2--release_created: ${{ steps.release.outputs.app-2--release_created}}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: release-please-manifest.json
+      - name: Print release outputs for debugging
+        continue-on-error: true
+        run: |
+          echo "Release outputs:"
+          echo "${{ toJson(steps.release.outputs) }}"
+
+  start:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/app-2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: '0.7.13'
+      - name: Install dependencies
+        run: uv sync
+      - name: Lint
+        run: uvx ruff check
+      - name: Format
+        run: uvx ruff format --check
+      - name: Start
+        run: uv run main.py

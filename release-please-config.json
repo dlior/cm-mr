@@ -1,0 +1,19 @@
+{
+  "include-component-in-tag": true,
+  "include-v-in-tag": true,
+  "tag-separator": "@",
+  "separate-pull-requests": false,
+  "packages": {
+    "apps/app-1": {
+      "package-name": "app-1",
+      "changelog-path": "CHANGELOG.md",
+      "release-type": "node"
+    },
+    "apps/app-2": {
+      "package-name": "app-2",
+      "changelog-path": "CHANGELOG.md",
+      "release-type": "python"
+    }
+  },
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
+}
