@@ -4,28 +4,6 @@ on:
   workflow_call:
 
 jobs:
-  release-please:
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: write
-    runs-on: ubuntu-latest
-    outputs:
-      app-3--tag_name: ${{ steps.release.outputs.app-3--tag_name}}
-      app-3--release_created: ${{ steps.release.outputs.app-3--release_created}}
-    steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          config-file: release-please-config.json
-          manifest-file: release-please-manifest.json
-      - name: Print release outputs for debugging
-        continue-on-error: true
-        run: |
-          echo "Release outputs:"
-          echo "${{ toJson(steps.release.outputs) }}"
-
   build:
     runs-on: ubuntu-latest
     defaults:
@@ -43,3 +21,21 @@ jobs:
         run: go build -v ./...
       - name: Start
         run: go run main.go
+
+  release-please:
+    needs: build
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    runs-on: ubuntu-latest
+    outputs:
+      app-3--tag_name: ${{ steps.release.outputs.app-3--tag_name}}
+      app-3--release_created: ${{ steps.release.outputs.app-3--release_created}}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: release-please-manifest.json
