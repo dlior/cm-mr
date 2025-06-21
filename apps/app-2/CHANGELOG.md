@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/dlior/cm-mr/compare/app-2@v1.1.1...app-2@v1.1.2) (2025-06-21)
+
+
+### Bug Fixes
+
+* **app-1,app-2,app-3:** chuck norris joke ([f95fad8](https://github.com/dlior/cm-mr/commit/f95fad8fa72b1c3410db9f921707740f4c638a41))
+
 ## [1.1.1](https://github.com/dlior/cm-mr/compare/app-2@v1.1.0...app-2@v1.1.1) (2025-06-21)
 
 
