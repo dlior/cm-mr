@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/dlior/cm-mr/compare/app-3@v1.0.0...app-3@v1.0.1) (2025-06-21)
+
+
+### Bug Fixes
+
+* **app-3:** log ([237055e](https://github.com/dlior/cm-mr/commit/237055ead643ada105a8356e5da3b5efa6d2de1e))
+
 ## 1.0.0 (2025-06-21)
 
 
