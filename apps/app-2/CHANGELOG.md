@@ -5,6 +5,13 @@
 
 ### Features
 
+* **app-1,app-2:** cm-mr initial commit ([9554160](https://github.com/dlior/cm-mr/commit/95541601242f445c0f4909c56e835039e25cc711))
+
+## 0.1.0 (2025-06-21)
+
+
+### Features
+
 * initial commit ([84be2f2](https://github.com/dlior/cm-mr/commit/84be2f2de6c243c691799cc75ec03892db0b708a))
 * initial commit ([15f433d](https://github.com/dlior/cm-mr/commit/15f433de709535aecc5a9a695452e8bc79b67e05))
 * initial commit ([e76105f](https://github.com/dlior/cm-mr/commit/e76105f7d1f28a66057b9f36968af3e50d245af6))
