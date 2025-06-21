@@ -19,8 +19,6 @@ jobs:
         run: |
           yarn install
           echo "${{ secrets.GITHUB_TOKEN }}"
-      - name: Build
-        run: yarn build
       - name: Start
         run: yarn start
 
