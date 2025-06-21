@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/dlior/cm-mr/compare/app-3@v1.0.2...app-3@v1.0.3) (2025-06-21)
+
+
+### Bug Fixes
+
+* **app-3:** joke ([a880120](https://github.com/dlior/cm-mr/commit/a880120d0a309be96d048e9b353a21924c78958e))
+
 ## [1.0.2](https://github.com/dlior/cm-mr/compare/app-3@v1.0.1...app-3@v1.0.2) (2025-06-21)
 
 
