@@ -1,4 +1,4 @@
-name: App 2 Pipeline
+name: App 3 Pipeline
 
 on:
   workflow_call:
@@ -11,8 +11,8 @@ jobs:
       issues: write
     runs-on: ubuntu-latest
     outputs:
-      app-2--tag_name: ${{ steps.release.outputs.app-2--tag_name}}
-      app-2--release_created: ${{ steps.release.outputs.app-2--release_created}}
+      app-3--tag_name: ${{ steps.release.outputs.app-3--tag_name}}
+      app-3--release_created: ${{ steps.release.outputs.app-3--release_created}}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
@@ -26,22 +26,20 @@ jobs:
           echo "Release outputs:"
           echo "${{ toJson(steps.release.outputs) }}"
 
-  start:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: apps/app-2
+        working-directory: apps/app-3
     steps:
       - uses: actions/checkout@v4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
+      - name: Setup Go
+        uses: actions/setup-go@v5
         with:
-          version: '0.7.13'
+          go-version: '1.24.4'
       - name: Install dependencies
-        run: uv sync
-      - name: Lint
-        run: uvx ruff check
-      - name: Format
-        run: uvx ruff format --check
+        run: go get .
+      - name: Build
+        run: go build -v ./...
       - name: Start
-        run: uv run main.py
+        run: go run main.go

@@ -25,6 +25,7 @@ jobs:
     outputs:
       app-1: ${{ steps.filter.outputs.app_1 }}
       app-2: ${{ steps.filter.outputs.app_2 }}
+      app-3: ${{ steps.filter.outputs.app_3 }}
     steps:
       - uses: actions/checkout@v4
       - id: filter
@@ -35,6 +36,8 @@ jobs:
               - 'apps/app-1/**'
             app_2:
               - 'apps/app-2/**'
+            app_3:
+              - 'apps/app-3/**'
 
   app-1:
     needs: detect-changes
@@ -49,6 +52,15 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.app-2 == 'true'
     uses: ./.github/workflows/app-2.yml
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+  app-3:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.app-3 == 'true'
+    uses: ./.github/workflows/app-3.yml
     permissions:
       contents: write
       pull-requests: write
