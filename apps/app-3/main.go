@@ -23,13 +23,13 @@ func main() {
 	}
 
 	var result struct {
-		Joke string `json:"value"`
+		Value string `json:"value"`
 	}
 
 	if err := json.Unmarshal(body, &result); err != nil {
 		log.Fatalf("Error reading response: %v", err)
 	}
 
-	fmt.Println("joke:", string(result.Joke))
+	fmt.Println("joke:", string(result.Value))
 
 }
