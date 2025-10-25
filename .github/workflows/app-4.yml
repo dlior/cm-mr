@@ -1,19 +1,40 @@
 name: App 4 Pipeline
 
 on:
+    workflow_dispatch:
+        inputs:
+            NAME:
+                description: "Optional NAME for visible job (overrides vars)"
+                required: false
+                default: "visible-test"
     push:
         paths:
             - "apps/app-4/**"
             - ".github/workflows/app-4.yml"
     schedule:
-        - cron: "*/1 * * * *"
+        - cron: "*/5 * * * *"
 
 jobs:
-    test_schedule:
+    secret_job:
+        name: Run with repo variable (visible)
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - name: Run script
+            - name: "Run script"
               env:
                   NAME: ${{ secrets.NAME }}
               run: apps/app-4/script.sh "${{ secrets.NAME }}"
+
+    input_job:
+        name: Run with workflow input (visible)
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: "Show NAME source"
+              run: |
+                  echo "Using NAME from workflow input (manual run)"
+                  echo "NAME: ${{ github.event.inputs.NAME }}"
+            - name: "Run script (input)"
+              env:
+                  NAME: ${{ github.event.inputs.NAME }}
+              run: apps/app-4/script.sh "${{ github.event.inputs.NAME }}"
